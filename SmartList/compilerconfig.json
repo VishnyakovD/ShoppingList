@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "css/main.css",
+    "inputFile": "css/main.scss"
+  },
+  {
+    "outputFile": "www/css/main.css",
+    "inputFile": "www/css/main.scss"
+  },
+  {
+    "outputFile": "www/css/font-awesome.css",
+    "inputFile": "www/css/font-awesome.scss"
+  }
+]

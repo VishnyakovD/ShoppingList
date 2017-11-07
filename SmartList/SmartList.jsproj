@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Android">
+      <Configuration>Debug</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|iOS">
+      <Configuration>Debug</Configuration>
+      <Platform>iOS</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Windows-x64">
+      <Configuration>Debug</Configuration>
+      <Platform>Windows-x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Windows-x86">
+      <Configuration>Debug</Configuration>
+      <Platform>Windows-x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Windows-ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>Windows-ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Android">
+      <Configuration>Release</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|iOS">
+      <Configuration>Release</Configuration>
+      <Platform>iOS</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Windows-x64">
+      <Configuration>Release</Configuration>
+      <Platform>Windows-x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Windows-x86">
+      <Configuration>Release</Configuration>
+      <Platform>Windows-x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Windows-ARM">
+      <Configuration>Release</Configuration>
+      <Platform>Windows-ARM</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>90159add-39eb-45b2-9ce1-3607bc50412d</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectCapability Include="UseFileGlobs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '15.0'">
+    <VisualStudioVersion>15.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TypeScriptCompileOnSaveEnabled>false</TypeScriptCompileOnSaveEnabled>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\ApacheCordovaTools\vs-mda-targets\Microsoft.TypeScript.MDA.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\ApacheCordovaTools\vs-mda-targets\Microsoft.MDA.FileMirroring.targets" />
+  <PropertyGroup>
+    <ProjectUISubcaption>Tools for Apache Cordova</ProjectUISubcaption>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetPlatformIdentifier>MDD</TargetPlatformIdentifier>
+  </PropertyGroup>
+  <Target Name="EnsureBuildPrerequisites">
+    <!-- These errors will trigger if building from inside Visual Studio and requirements could not be determined -->
+    <Error Condition="$(MDAPropertiesEvaluated) == 'true' And $(NodeJsDir) == ''" Text="Path to NodeJs could not be determined. Please check that NodeJs has been installed." />
+    <!-- These errors will trigger if building from outside Visual Studio (e.g. command line) and environment variables have not been set -->
+    <Error Condition="$(MDAPropertiesEvaluated) == '' And $(NodeJsDir) == ''" Text="Path to NodeJs has not been specified. Please check that NodeJs has been installed and set the NodeJsDir environment variable before building." />
+    <!-- Sanity check that things exist in the specified places. These are more likely to fail if building outside Visual Studio and the required environment variables have not been set, or set incorrectly. -->
+    <Error Condition="!Exists('$(NodeJsDir)') Or !Exists('$(NodeJsDir)\node.exe')" Text="The specified NodeJs directory $(NodeJsDir) either does not exist, or does not contain node.exe. Please check that NodeJs has been installed, and set the NodeJsDir variable to the correct directory." />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <!-- Customize which folders are not shown by default -->
+    <ExcludedItems>bin;bld;platforms;node_modules;simulation</ExcludedItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="**\**" Exclude="**\platforms\**;**\bin\**;**\bld\**;**\node_modules\**;**\simulation\**;.gitignore;SmartList.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="node_modules\vue-class-component\**" />
+    <Content Remove="node_modules\vue\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="plugins\vue\src\platforms\.DS_Store" />
+    <Content Include="plugins\vue\src\platforms\web\compiler\directives\html.js" />
+    <Content Include="plugins\vue\src\platforms\web\compiler\directives\index.js" />
+    <Content Include="plugins\vue\src\platforms\web\compiler\directives\model.js" />
+    <Content Include="plugins\vue\src\platforms\web\compiler\directives\text.js" />
+    <Content Include="plugins\vue\src\platforms\web\compiler\index.js" />
+    <Content Include="plugins\vue\src\platforms\web\compiler\modules\class.js" />
+    <Content Include="plugins\vue\src\platforms\web\compiler\modules\index.js" />
+    <Content Include="plugins\vue\src\platforms\web\compiler\modules\model.js" />
+    <Content Include="plugins\vue\src\platforms\web\compiler\modules\style.js" />
+    <Content Include="plugins\vue\src\platforms\web\compiler\options.js" />
+    <Content Include="plugins\vue\src\platforms\web\compiler\util.js" />
+    <Content Include="plugins\vue\src\platforms\web\entry-compiler.js" />
+    <Content Include="plugins\vue\src\platforms\web\entry-runtime-with-compiler.js" />
+    <Content Include="plugins\vue\src\platforms\web\entry-runtime.js" />
+    <Content Include="plugins\vue\src\platforms\web\entry-server-basic-renderer.js" />
+    <Content Include="plugins\vue\src\platforms\web\entry-server-renderer.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\class-util.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\components\index.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\components\transition-group.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\components\transition.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\directives\index.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\directives\model.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\directives\show.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\index.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\modules\attrs.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\modules\class.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\modules\dom-props.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\modules\events.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\modules\index.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\modules\style.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\modules\transition.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\node-ops.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\patch.js" />
+    <Content Include="plugins\vue\src\platforms\web\runtime\transition-util.js" />
+    <Content Include="plugins\vue\src\platforms\web\server\compiler.js" />
+    <Content Include="plugins\vue\src\platforms\web\server\directives\index.js" />
+    <Content Include="plugins\vue\src\platforms\web\server\directives\show.js" />
+    <Content Include="plugins\vue\src\platforms\web\server\modules\attrs.js" />
+    <Content Include="plugins\vue\src\platforms\web\server\modules\class.js" />
+    <Content Include="plugins\vue\src\platforms\web\server\modules\dom-props.js" />
+    <Content Include="plugins\vue\src\platforms\web\server\modules\index.js" />
+    <Content Include="plugins\vue\src\platforms\web\server\modules\style.js" />
+    <Content Include="plugins\vue\src\platforms\web\server\util.js" />
+    <Content Include="plugins\vue\src\platforms\web\util\attrs.js" />
+    <Content Include="plugins\vue\src\platforms\web\util\class.js" />
+    <Content Include="plugins\vue\src\platforms\web\util\compat.js" />
+    <Content Include="plugins\vue\src\platforms\web\util\element.js" />
+    <Content Include="plugins\vue\src\platforms\web\util\index.js" />
+    <Content Include="plugins\vue\src\platforms\web\util\style.js" />
+    <Content Include="plugins\vue\src\platforms\weex\.DS_Store" />
+    <Content Include="plugins\vue\src\platforms\weex\compiler\.DS_Store" />
+    <Content Include="plugins\vue\src\platforms\weex\compiler\directives\index.js" />
+    <Content Include="plugins\vue\src\platforms\weex\compiler\directives\model.js" />
+    <Content Include="plugins\vue\src\platforms\weex\compiler\index.js" />
+    <Content Include="plugins\vue\src\platforms\weex\compiler\modules\append.js" />
+    <Content Include="plugins\vue\src\platforms\weex\compiler\modules\class.js" />
+    <Content Include="plugins\vue\src\platforms\weex\compiler\modules\index.js" />
+    <Content Include="plugins\vue\src\platforms\weex\compiler\modules\props.js" />
+    <Content Include="plugins\vue\src\platforms\weex\compiler\modules\style.js" />
+    <Content Include="plugins\vue\src\platforms\weex\entry-compiler.js" />
+    <Content Include="plugins\vue\src\platforms\weex\entry-framework.js" />
+    <Content Include="plugins\vue\src\platforms\weex\entry-runtime-factory.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\components\index.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\components\richtext.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\components\transition-group.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\components\transition.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\directives\index.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\index.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\modules\attrs.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\modules\class.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\modules\events.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\modules\index.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\modules\style.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\modules\transition.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\node-ops.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\patch.js" />
+    <Content Include="plugins\vue\src\platforms\weex\runtime\text-node.js" />
+    <Content Include="plugins\vue\src\platforms\weex\util\index.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="config.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4a0dddb5-7a95-4fbf-97cc-616d07737a77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="node_modules\" />
+  </ItemGroup>
+</Project>
