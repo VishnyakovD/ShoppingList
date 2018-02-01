@@ -5,8 +5,7 @@
 //
 // Copyright (c) Microsoft Open Technologies, Inc.
 // Licensed under the MIT license.
-
-/// <reference path="plugins/BatteryStatus.d.ts"/>
+													  
 /// <reference path="plugins/Camera.d.ts"/>
 /// <reference path="plugins/Contacts.d.ts"/>
 /// <reference path="plugins/Device.d.ts"/>
@@ -16,10 +15,8 @@
 /// <reference path="plugins/FileSystem.d.ts"/>
 /// <reference path="plugins/FileTransfer.d.ts"/>
 /// <reference path="plugins/Globalization.d.ts"/>
-/// <reference path="plugins/InAppBrowser.d.ts"/>
 /// <reference path="plugins/Media.d.ts"/>
 /// <reference path="plugins/MediaCapture.d.ts"/>
-/// <reference path="plugins/NetworkInformation.d.ts"/>
 /// <reference path="plugins/Push.d.ts"/>
 /// <reference path="plugins/Splashscreen.d.ts"/>
 /// <reference path="plugins/StatusBar.d.ts"/>

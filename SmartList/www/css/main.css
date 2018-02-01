@@ -122,9 +122,11 @@ body {
     display: inline-block;
     width: max-content;
     border-radius: 3px;
-    padding: 3px 6px;
     margin: 5px;
     font-size: 15px;
     background: ghostwhite;
-    height: 22px; }
+    height: 32px; }
+    .list-s-is .list-s-i div {
+      display: inline-block;
+      padding: 6px 10px; }
 

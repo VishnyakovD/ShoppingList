@@ -4,45 +4,47 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta name="format-detection" content="telephone=no">
 	<meta name="msapplication-tap-highlight" content="no">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">  
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.min.css">
 	<title>SmartList</title>
+
 </head>
 <body id="deviceready">
 
-   <div id="listmanager">
-   		<div class="list-is" v-bind:class="{long:isLong}">
-   			<div class="list-i" v-for="(item, index) in listUserLines" v-bind:class="{disabled: item.isDisabled}">
-   				<div class="i-btn remove" @click="listUserLines.splice(index, 1)"><i class="fa fa-trash-o"></i></div>
-   				<div class="i-txt">{{item.text1}} {{item.text2}}</div>
-   				<div class="i-btn apply" @click="{item.isDisabled=!item.isDisabled}"><i class="fa fa-check"></i></div>
-   			</div>
-   		</div>
 
-		 <div class="list-s-is" v-bind:class="{'active-search':isActiveSearch}"> 
-			 <!--<div class="i-btn close" @click="{isActiveSearch=!isActiveSearch}"><i class="fa fa-close"></i></div>-->
-			   <div class="list-s-i" v-for="item in listItemWorlds" @click="selectWorld(item.name)">
-	  			<div>{{item.name}}</div>	
-			   </div>
+	<div id="listmanager">
+		<div class="list-is" v-bind:class="{long:isLong}">
+			<div class="list-i" v-for="(item, index) in listUserLines" v-bind:class="{disabled: item.isDisabled}">
+				<div class="i-btn remove" @click="listUserLines.splice(index, 1)"><i class="fa fa-trash-o"></i></div>
+				<div class="i-txt">{{item.text1}} {{item.text2}}</div>
+				<div class="i-btn apply" @click="{item.isDisabled=!item.isDisabled}"><i class="fa fa-check"></i></div>
+			</div>
+		</div>
 
-		 </div>
+		<div class="list-s-is" v-bind:class="{'active-search':isActiveSearch}">
+			<!--<div class="i-btn close" @click="{isActiveSearch=!isActiveSearch}"><i class="fa fa-close"></i></div>-->
+			<div class="list-s-i" v-for="item in listItemWorlds">
+				<div @click="selectWorld(item.name)">{{item.name}}</div>
+				<div @click="addWorld(item.name)"><i class="fa fa-check"></i></div>
+			</div>
 
-   		<div class="search-block" v-bind:class="{long:isLong}">
-   			<div class="colapse-button" @click="{isLong=!isLong}"><i class="fa fa-sort"></i></div>
-   			<input type="text" data-lang="search-placeholder" v-model="searchValue" />
-   			<div class="tools-button"><i class="fa fa-bars"></i></div>
-   		</div>
-   </div> 
+		</div>
+
+		<div class="search-block" v-bind:class="{long:isLong}">
+			<div class="colapse-button" @click="{isLong=!isLong}"><i class="fa fa-sort"></i></div>
+			<input type="text" data-lang="search-placeholder" v-model="searchValue" />
+			<div class="tools-button"><i class="fa fa-bars"></i></div>
+		</div>
+	</div>
 
 
 	<script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" data-main="scripts/startup" src="lib/require.2.1.8.js" async></script>
+
 	<script src="scripts/vue.min.js"></script>
-	<script src="scripts/main.js"></script>	
-	<script src="scripts/list-manager.js"></script>
-	<script src="scripts/list-worlds.js"></script>
-
-
+	<script src="scripts/typings/TS/list-manager.js"></script>
+	<script src="scripts/typings/TS/list-worlds.js"></script>
+	<script src="scripts/typings/TS/main.js"></script>
 </body>
 </html>

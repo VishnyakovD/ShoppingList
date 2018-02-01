@@ -1,4 +1,4 @@
-var Main = (function () {
+var Main = /** @class */ (function () {
     function Main() {
         this.lang = Language.rus;
     }

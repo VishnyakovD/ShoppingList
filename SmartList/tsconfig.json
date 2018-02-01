@@ -1,13 +1,15 @@
 {
-  "compileOnSave": true,
-  "compilerOptions": {
-    "noImplicitAny": false,
-    "noEmitOnError": true,
-    "removeComments": false,
-    "sourceMap": true,
-    "outDir": "www/scripts",
-    "module": "amd",
-    "target": "es5"
-  },
-  "exclude": ["platforms", "node_modules", "bower_components", "plugins", "merges", "res", "bin", "bld"]
+	"version": "2.6.2",
+	"compileOnSave": true,
+	"compilerOptions": {
+		"target": "es5",
+		"module": "amd",
+		"noImplicitAny": false,
+		"removeComments": false,
+		"sourceMap": true,
+		"inlineSources": true,
+		"noEmitOnError": true,
+		"outDir": "./www/scripts"
+	},
+	"exclude": [ "platforms", "node_modules", "bower_components", "plugins", "merges", "res", "bin", "bld" ]
 }

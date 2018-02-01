@@ -1,4 +1,4 @@
-var ListWorlds = (function () {
+var ListWorlds = /** @class */ (function () {
     function ListWorlds() {
         this.listWorlds = [];
         switch (main.lang) {
@@ -18,7 +18,7 @@ var ListWorlds = (function () {
     }
     return ListWorlds;
 }());
-var ItemWorld = (function () {
+var ItemWorld = /** @class */ (function () {
     function ItemWorld(id, name, lang) {
         this.id = id;
         this.name = name;
