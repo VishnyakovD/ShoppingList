@@ -10,6 +10,5 @@
 		"inlineSources": true,
 		"noEmitOnError": true,
 		"outDir": "./www/scripts"
-	},
-	"exclude": [ "platforms", "node_modules", "bower_components", "plugins", "merges", "res", "bin", "bld" ]
+	}
 }

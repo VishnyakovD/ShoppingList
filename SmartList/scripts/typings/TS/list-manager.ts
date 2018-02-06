@@ -8,22 +8,20 @@
 
 class ListManager {
 	vm: vuejs.Vue;
-	bodyBlock;
-	searchBlock;
+
 	constructor() {
-		this.bodyBlock = document.getElementById('deviceready');
-		this.searchBlock = this.bodyBlock.querySelector('.search-block');
+
 
 		let data: AppData = new AppData();
 		
 
-		data.listUserLines.push(new UserLine(0, "Text0", "Text2", false));
-		data.listUserLines.push(new UserLine(1, "Text1", "Text2", false));
-		data.listUserLines.push(new UserLine(2, "Text2", "Text2", false));
-		data.listUserLines.push(new UserLine(3, "Text3", "Text2", false));
-		data.listUserLines.push(new UserLine(4, "Text4", "Text2", false));
-		data.listUserLines.push(new UserLine(5, "Text5", "Text2", false));
-		data.listUserLines.push(new UserLine(6, "Text6", "Text2", false));
+		//data.listUserLines.push(new UserLine(0, "Text0", "Text2", false));
+		//data.listUserLines.push(new UserLine(1, "Text1", "Text2", false));
+		//data.listUserLines.push(new UserLine(2, "Text2", "Text2", false));
+		//data.listUserLines.push(new UserLine(3, "Text3", "Text2", false));
+		//data.listUserLines.push(new UserLine(4, "Text4", "Text2", false));
+		//data.listUserLines.push(new UserLine(5, "Text5", "Text2", false));
+		//data.listUserLines.push(new UserLine(6, "Text6", "Text2", false));
 
 
 		this.vm = new Vue({
@@ -40,20 +38,40 @@ class ListManager {
 				}
 			},
 			methods: {
-				addUserLine: function () {
-					//listUserLines.push(new UserLine(this.vm.$data.listUserLines.length - 1, this.vm.$data.searchValue, "Text2", false));
-				},
-				selectWorld: function (text: string) {
 
+				selectWorld: function (text: string) { 
 					this.searchValue = text;
 					this.isActiveSearch = false;
 				},
 				addWorld: function (text: string) {
 					this.searchValue = "";
 					this.isActiveSearch = false;
-					this.listUserLines.push(new UserLine(444, text, "", false));
-					
+					let id = this.listUserLines.length > 0 ?  this.listUserLines.length - 1 : 0;
+					this.listUserLines.push(new UserLine(id, text, "", false));						
+				},
+				addWorldFromInput: function (e) {
+					if (e.keyCode === 13) {
+						if (this.searchValue.length === 0) {
+							this.isActiveSearch = false;
+							return;
+						}
+						this.isActiveSearch = false;
+						let id = this.listUserLines.length > 0 ? this.listUserLines.length - 1 : 0;
+						let lastSpace = this.searchValue.lastIndexOf(' ');
+						let arrStrs = [];
+						if (lastSpace > 0) {
+							arrStrs = [this.searchValue.substring(0, lastSpace), this.searchValue.substring(lastSpace + 1)];
+						} else {
+							arrStrs = [this.searchValue];
+						}
+
+
+						
+						this.listUserLines.push(new UserLine(id, arrStrs[0], arrStrs.length > 1 ? arrStrs[1]:"", false));						
+						this.searchValue = "";
+					}
 				}
+
 
 			}
 		});
