@@ -17,7 +17,7 @@
 		<div class="list-is" v-bind:class="{long:isLong}">
 			<div v-for="(item, index) in listUserLines" class="list-i" v-bind:class="{disabled: item.isDisabled}">
 				<div class="i-btn remove" @click="listUserLines.splice(index, 1)"><i class="fa fa-trash-o"></i></div>
-				<div class="i-txt"><span class="text1">{{item.text1}}</span> <span class="text2">{{item.text2}}</span></div>
+				<div class="i-txt" @click="{item.isDisabled=!item.isDisabled}"><span class="text1">{{item.text1}}</span> <span class="text2">{{item.text2}}</span></div>
 				<div class="i-btn apply" @click="{item.isDisabled=!item.isDisabled}">
 					<i class="fa" v-bind:class="{'fa-check-circle':item.isDisabled, 'fa-check':!item.isDisabled}"></i>
 				</div>
@@ -34,7 +34,7 @@
 
 		<div class="search-block" v-bind:class="{long:isLong}">
 			<div class="colapse-button" @click="{isLong=!isLong}"><i class="fa " v-bind:class="{'fa-chevron-down':isLong, 'fa-chevron-up':!isLong}"></i></div>
-			<input type="text" data-lang="search-placeholder" v-on:keyup="addWorldFromInput" v-model="searchValue" />
+			<input type="text" id="searchinput" tabindex="0" data-lang="search-placeholder" v-on:keyup="addWorldFromInput" v-model="searchValue" />
 			<i class="fa fa-search search-icon"></i>
 			<div class="tools-button"><i class="fa fa-bars"></i></div>
 		</div>

@@ -11,7 +11,6 @@ class ListManager {
 
 	constructor() {
 
-
 		let data: AppData = new AppData();
 		
 
@@ -40,21 +39,26 @@ class ListManager {
 			methods: {
 
 				selectWorld: function (text: string) { 
+					setFocusInput();
 					this.searchValue = text;
 					this.isActiveSearch = false;
 				},
 				addWorld: function (text: string) {
+					setFocusInput();
+
 					this.searchValue = "";
 					this.isActiveSearch = false;
 					let id = this.listUserLines.length > 0 ?  this.listUserLines.length - 1 : 0;
 					this.listUserLines.push(new UserLine(id, text, "", false));						
 				},
-				addWorldFromInput: function (e) {
+				addWorldFromInput: function (e) { 
 					if (e.keyCode === 13) {
 						if (this.searchValue.length === 0) {
 							this.isActiveSearch = false;
 							return;
 						}
+						setFocusInput();
+
 						this.isActiveSearch = false;
 						let id = this.listUserLines.length > 0 ? this.listUserLines.length - 1 : 0;
 						let lastSpace = this.searchValue.lastIndexOf(' ');
@@ -76,6 +80,10 @@ class ListManager {
 			}
 		});
 	}
+}
+
+function setFocusInput () {
+	document.getElementById("searchinput").focus();
 }
 
 class UserLine {

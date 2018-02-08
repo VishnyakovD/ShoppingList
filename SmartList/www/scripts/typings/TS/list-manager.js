@@ -34,10 +34,12 @@ var ListManager = /** @class */ (function () {
             },
             methods: {
                 selectWorld: function (text) {
+                    setFocusInput();
                     this.searchValue = text;
                     this.isActiveSearch = false;
                 },
                 addWorld: function (text) {
+                    setFocusInput();
                     this.searchValue = "";
                     this.isActiveSearch = false;
                     var id = this.listUserLines.length > 0 ? this.listUserLines.length - 1 : 0;
@@ -49,6 +51,7 @@ var ListManager = /** @class */ (function () {
                             this.isActiveSearch = false;
                             return;
                         }
+                        setFocusInput();
                         this.isActiveSearch = false;
                         var id = this.listUserLines.length > 0 ? this.listUserLines.length - 1 : 0;
                         var lastSpace = this.searchValue.lastIndexOf(' ');
@@ -68,6 +71,9 @@ var ListManager = /** @class */ (function () {
     }
     return ListManager;
 }());
+function setFocusInput() {
+    document.getElementById("searchinput").focus();
+}
 var UserLine = /** @class */ (function () {
     function UserLine(position, text1, text2, isDisabled) {
         this.isDisabled = isDisabled;
