@@ -12,7 +12,10 @@ body {
   margin: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #fafafa; }
+  background: #fafafa;
+  background-image: url("../images/shopping-bg.svg");
+  background-repeat: no-repeat;
+  background-position: center; }
 
 .list-is {
   overflow-x: auto;
@@ -69,7 +72,7 @@ body {
   height: 5px;
   box-shadow: 0px 0px 2px 1px rgba(51, 51, 51, 0.3);
   display: flex;
-  background: #24d500;
+  background: #c2bd99;
   z-index: 10;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
   .search-block.long {
@@ -81,14 +84,14 @@ body {
     z-index: 99999;
     bottom: 5px;
     right: 55px;
-    background: #24d500;
+    background: #c2bd99;
     height: 40px;
     width: 45px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     text-align: center;
     vertical-align: middle;
-    box-shadow: 0 -5px 12px -8px black, -4px 0px 7px -5px black, 3px -2px 10px -5px black; }
+    box-shadow: 0 -5px 12px -9px black, -3px 0px 7px -5px black, 2px -2px 7px -5px black; }
     .search-block .colapse-button .fa {
       opacity: 0.8;
       color: white;
@@ -127,6 +130,14 @@ body {
     color: rgba(255, 255, 255, 0.5);
     font-weight: 100;
     z-index: 0; }
+  .search-block .search-paceholder {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 100;
+    z-index: 0;
+    font-size: 20px; }
 
 .list-s-is {
   position: fixed;
@@ -152,7 +163,7 @@ body {
     margin: 5px;
     font-size: 15px;
     height: 32px;
-    background: #30c75e;
+    background: #5a9b9f;
     color: white; }
     .list-s-is .list-s-i div {
       display: inline-block;

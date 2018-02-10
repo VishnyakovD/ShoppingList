@@ -14,6 +14,7 @@
 
 
 	<div id="listmanager">
+		<!--Список пользовательских слов НАЧАЛО-->
 		<div class="list-is" v-bind:class="{long:isLong}">
 			<div v-for="(item, index) in listUserLines" class="list-i" v-bind:class="{disabled: item.isDisabled}">
 				<div class="i-btn remove" @click="listUserLines.splice(index, 1)"><i class="fa fa-trash-o"></i></div>
@@ -23,21 +24,25 @@
 				</div>
 			</div>
 		</div>
-
+		<!--Список пользовательских слов КОНЕЦ-->
+		<!--Список слов поиска НАЧАЛО-->
 		<div class="list-s-is" v-bind:class="{'active-search':isActiveSearch}">
-			<div class="list-s-i" v-for="item in listItemWorlds">
+			<div class="list-s-i" v-for="item in listItemWorlds" v-if="listItemWorlds.length>0">
 				<div @click="selectWorld(item.name)">{{item.name}}</div>
 				<div @click="addWorld(item.name)"><i class="fa fa-check"></i></div>
 			</div>
 
 		</div>
-
+		<!--Список слов поиска КОНЕЦ-->
+		<!--Поле ввода для поиска НАЧАЛО-->
 		<div class="search-block" v-bind:class="{long:isLong}">
 			<div class="colapse-button" @click="{isLong=!isLong}"><i class="fa " v-bind:class="{'fa-chevron-down':isLong, 'fa-chevron-up':!isLong}"></i></div>
 			<input type="text" id="searchinput" tabindex="0" data-lang="search-placeholder" v-on:keyup="addWorldFromInput" v-model="searchValue" />
+			<div class="search-paceholder" v-if="!isActiveSearch">Название Количество</div>
 			<i class="fa fa-search search-icon"></i>
 			<div class="tools-button"><i class="fa fa-bars"></i></div>
 		</div>
+		<!--Поле ввода для поиска КОНЕЦ-->
 	</div>
 
 
