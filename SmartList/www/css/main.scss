@@ -40,6 +40,10 @@ body {
 
 		.text1 {
 			float: left;
+
+			&:first-letter {
+				text-transform: capitalize;
+			}
 		}
 
 		.text2 {
@@ -80,7 +84,7 @@ body {
 
 			.i-txt {
 				//opacity: 0.3;
-				text-decoration: line-through!important;
+				text-decoration: line-through !important;
 			}
 
 			.fa-check-circle {
@@ -107,15 +111,18 @@ body {
 	height: 5px;
 	box-shadow: 0px 0px 2px 1px rgba(51, 51, 51, 0.3);
 	display: flex;
-	background: #c2bd99;
+	background: #f7bd5b;
 	z-index: 10;
 	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	transition: 0.4s;
 
 	&.long {
 		height: 60px;
+		transition: 0.4s;
 
 		.colapse-button {
 			bottom: 57px;
+			transition: 0.4s;
 		}
 	}
 
@@ -124,7 +131,7 @@ body {
 		z-index: 99999;
 		bottom: 5px;
 		right: 55px;
-		background: #c2bd99;
+		background: #f7bd5b;
 		height: 40px;
 		width: 45px;
 		border-top-left-radius: 30px;
@@ -132,6 +139,7 @@ body {
 		text-align: center;
 		vertical-align: middle;
 		box-shadow: 0 -5px 12px -9px black, -3px 0px 7px -5px black, 2px -2px 7px -5px black;
+		transition: 0.4s;
 
 		.fa {
 			opacity: 0.8;
@@ -187,7 +195,7 @@ body {
 		position: absolute;
 		top: 15px;
 		left: 20px;
-		color: rgba(255,255,255,.3);
+		color: rgba(255,255,255,.5);
 		font-weight: 100;
 		z-index: 0;
 		font-size: 20px;
@@ -200,7 +208,7 @@ body {
 	right: 0;
 	top: 0;
 	bottom: 60px;
-	background: rgba(0,0,0,.3);
+	background: rgba(90, 155, 159, 0.2);
 	z-index: 9999;
 	font-weight: 500;
 	overflow-x: hidden;
