@@ -17,13 +17,30 @@ body {
   background-repeat: no-repeat;
   background-position: center; }
 
+.blink {
+  -webkit-animation: argh-my-eyes 2s;
+  -moz-animation: argh-my-eyes 2s;
+  animation: argh-my-eyes 2s; }
+
+@-webkit-keyframes argh-my-eyes {
+  0% {
+    background-color: #fff; }
+  25% {
+    background-color: #f7bd5b; }
+  50% {
+    background-color: #fff; }
+  75% {
+    background-color: #f7bd5b; }
+  100% {
+    background-color: #fff; } }
+
 .list-is {
   overflow-x: auto;
   padding-bottom: 10px;
-  max-height: calc(100% - 10px);
+  max-height: calc(100vh - 10px);
   z-index: 1; }
   .list-is.long {
-    max-height: calc(100% - 60px);
+    max-height: calc(100vh - 60px);
     padding-bottom: 65px; }
   .list-is .list-i {
     height: 50px;
@@ -102,7 +119,12 @@ body {
       opacity: 0.8;
       color: white;
       font-size: 25px;
-      margin-top: 9px; }
+      margin-top: 9px;
+      transform: rotate(0deg);
+      transition: transform 550ms ease; }
+      .search-block .colapse-button .fa.long {
+        transform: rotate(180deg);
+        transition: transform 550ms ease; }
   .search-block .tools-button {
     display: block;
     height: 40px;

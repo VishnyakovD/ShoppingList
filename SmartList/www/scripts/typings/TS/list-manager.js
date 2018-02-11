@@ -33,17 +33,23 @@ var ListManager = /** @class */ (function () {
                 }
             },
             methods: {
+                scrollToTop: function () {
+                    var container = document.querySelector("#userlist");
+                    container.scrollTop = 0;
+                },
                 selectWorld: function (text) {
                     setFocusInput();
                     this.searchValue = text;
                     this.isActiveSearch = false;
+                    this.scrollToTop();
                 },
                 addWorld: function (text) {
                     setFocusInput();
                     this.searchValue = "";
                     this.isActiveSearch = false;
                     var id = this.listUserLines.length > 0 ? this.listUserLines.length - 1 : 0;
-                    this.listUserLines.push(new UserLine(id, text, "", false));
+                    this.listUserLines.unshift(new UserLine(id, text, "", false));
+                    this.scrollToTop();
                 },
                 addWorldFromInput: function (e) {
                     if (e.keyCode === 13) {
@@ -62,8 +68,9 @@ var ListManager = /** @class */ (function () {
                         else {
                             arrStrs = [this.searchValue];
                         }
-                        this.listUserLines.push(new UserLine(id, arrStrs[0], arrStrs.length > 1 ? arrStrs[1] : "", false));
+                        this.listUserLines.unshift(new UserLine(id, arrStrs[0], arrStrs.length > 1 ? arrStrs[1] : "", false));
                         this.searchValue = "";
+                        this.scrollToTop();
                     }
                 }
             }

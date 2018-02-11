@@ -7,14 +7,13 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.min.css">
-	<title>Shopping List</title>
-
+	<title>Shopping List</title>   
 </head>
 <body id="deviceready">	 
 	<div id="listmanager">
 		<!--Список пользовательских слов НАЧАЛО-->
-		<div class="list-is" v-bind:class="{long:isLong}">
-			<div v-for="(item, index) in listUserLines" class="list-i" v-bind:class="{disabled: item.isDisabled}" v-bind:id="{scrollhere: listUserLines.lenght==index}">
+		<div class="list-is" id="userlist" v-bind:class="{long:isLong}">
+			<div v-for="(item, index) in listUserLines" class="list-i" v-bind:class="{disabled: item.isDisabled, blink:index==0}">
 				<div class="i-btn remove" @click="listUserLines.splice(index, 1)"><i class="fa fa-trash-o"></i></div>
 				<div class="i-txt" @click="{item.isDisabled=!item.isDisabled}"><span class="text1">{{item.text1}}</span> <span class="text2">{{item.text2}}</span></div>
 				<div class="i-btn apply" @click="{item.isDisabled=!item.isDisabled}">
@@ -34,7 +33,7 @@
 		<!--Список слов поиска КОНЕЦ-->
 		<!--Поле ввода для поиска НАЧАЛО-->
 		<div class="search-block" v-bind:class="{long:isLong}">
-			<div class="colapse-button" @click="{isLong=!isLong}"><i class="fa " v-bind:class="{'fa-chevron-down':isLong, 'fa-chevron-up':!isLong}"></i></div>
+			<div class="colapse-button" @click="{isLong=!isLong}"><i class="fa fa-chevron-down" v-bind:class="{'long':!isLong}"></i></div>
 			<input type="text" id="searchinput" tabindex="0" data-lang="search-placeholder" v-on:keyup="addWorldFromInput" v-model="searchValue" />
 			<div class="search-paceholder" v-if="!isActiveSearch">Название Количество</div>
 			<i class="fa fa-search search-icon"></i>
