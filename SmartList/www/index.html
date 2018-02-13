@@ -13,7 +13,7 @@
 	<div id="listmanager">
 		<!--Список пользовательских слов НАЧАЛО-->
 		<div class="list-is" id="userlist" v-bind:class="{long:isLong}">
-			<div v-for="(item, index) in listUserLines" class="list-i" v-bind:class="{disabled: item.isDisabled, blink:index==0}">
+			<div v-for="(item, index) in listUserLines" class="list-i" v-bind:class="{disabled: item.isDisabled, blink:(index==0&&activeFirstElement==true)}">
 				<div class="i-btn remove" @click="listUserLines.splice(index, 1)"><i class="fa fa-trash-o"></i></div>
 				<div class="i-txt" @click="{item.isDisabled=!item.isDisabled}"><span class="text1">{{item.text1}}</span> <span class="text2">{{item.text2}}</span></div>
 				<div class="i-btn apply" @click="{item.isDisabled=!item.isDisabled}">

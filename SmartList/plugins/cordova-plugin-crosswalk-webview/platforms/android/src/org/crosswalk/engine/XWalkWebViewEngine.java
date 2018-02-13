@@ -22,20 +22,17 @@ package org.crosswalk.engine;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.Manifest;
 import android.util.Log;
 import android.view.View;
 import android.webkit.ValueCallback;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+
+import junit.framework.Assert;
 
 import org.apache.cordova.CordovaBridge;
 import org.apache.cordova.CordovaInterface;
@@ -63,8 +60,6 @@ public class XWalkWebViewEngine implements CordovaWebViewEngine {
     public static final String XWALK_Z_ORDER_ON_TOP = "xwalkZOrderOnTop";
 
     private static final String XWALK_EXTENSIONS_FOLDER = "xwalk-extensions";
-
-    private static final int PERMISSION_REQUEST_CODE = 100;
 
     protected final XWalkCordovaView webView;
     protected XWalkCordovaCookieManager cookieManager;
@@ -179,7 +174,6 @@ public class XWalkWebViewEngine implements CordovaWebViewEngine {
                 XWalkWebViewEngine.this.cordova.getActivity().runOnUiThread(r);
             }
         }));
-        nativeToJsMessageQueue.addBridgeMode(new NativeToJsMessageQueue.EvalBridgeMode(this, cordova));
         bridge = new CordovaBridge(pluginManager, nativeToJsMessageQueue);
     }
 
@@ -321,46 +315,5 @@ public class XWalkWebViewEngine implements CordovaWebViewEngine {
 
     public boolean isXWalkReady() {
         return activityDelegate.isXWalkReady();
-    }
-
-    public interface PermissionRequestListener {
-        public void onRequestPermissionResult(int requestCode, String[] permissions,
-                int[] grantResults);
-    }
-
-    public boolean requestPermissionsForFileChooser(final PermissionRequestListener listener) {
-        ArrayList<String> dangerous_permissions = new ArrayList<String>();
-        try {
-            PackageManager packageManager = cordova.getActivity().getPackageManager();
-            PackageInfo packageInfo = packageManager.getPackageInfo(
-                    cordova.getActivity().getPackageName(), PackageManager.GET_PERMISSIONS);
-            for (String permission : packageInfo.requestedPermissions) {
-                if (permission.equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        || permission.equals(Manifest.permission.CAMERA)) {
-                    dangerous_permissions.add(permission);
-                }
-            }
-        } catch (NameNotFoundException e) {
-        }
-
-        if (dangerous_permissions.isEmpty()) {
-            return false;
-        }
-
-        CordovaPlugin permissionRequestPlugin = new CordovaPlugin() {
-            @Override
-            public void onRequestPermissionResult(int requestCode, String[] permissions,
-                    int[] grantResults) {
-                if (requestCode != PERMISSION_REQUEST_CODE) return;
-                listener.onRequestPermissionResult(requestCode, permissions, grantResults);
-            }
-        };
-        try {
-            cordova.requestPermissions(permissionRequestPlugin, PERMISSION_REQUEST_CODE,
-                    dangerous_permissions.toArray(new String[dangerous_permissions.size()]));
-        } catch (NoSuchMethodError e) {
-            return false;
-        }
-        return true;
     }
 }

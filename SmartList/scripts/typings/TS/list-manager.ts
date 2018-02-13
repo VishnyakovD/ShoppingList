@@ -1,18 +1,18 @@
 ﻿class AppData {
 	isActiveSearch = false;
+	activeFirstElement = false;
 	searchValue = "";
 	isLong = true;
 	listUserLines: UserLine[] = [];
 	listItemWorlds = [];
 }
 
+let data: AppData;
+
 class ListManager {
 	vm: vuejs.Vue;
 
 	constructor() {
-
-		let data: AppData = new AppData();
-		
 
 		//data.listUserLines.push(new UserLine(0, "Text0", "Text2", false));
 		//data.listUserLines.push(new UserLine(1, "Text1", "Text2", false));
@@ -37,11 +37,28 @@ class ListManager {
 				}
 			},
 			methods: {
+				activatedFirstElement: function () {
+					this.activeFirstElement = true;
+					var _this = this;
+					setTimeout(function () { _this.activeFirstElement = false; }, 2000)
+
+				},
+				isContainsWorld: function (text): boolean {	
+					var result = false;
+					this.listUserLines.forEach(function (item, i) {
+						if (item.text1.toLowerCase() === text) {
+							result = true;
+							return result;
+						}
+					});
+					return result;
+				},
 				scrollToTop: function () {
 					var container = document.querySelector("#userlist");
 					container.scrollTop = 0;
+					this.activatedFirstElement();
 				},
-				selectWorld: function (text: string) { 
+				selectWorld: function (text: string) {
 					setFocusInput();
 
 					this.searchValue = text;
@@ -53,34 +70,70 @@ class ListManager {
 
 					this.searchValue = "";
 					this.isActiveSearch = false;
-					let id = this.listUserLines.length > 0 ?  this.listUserLines.length - 1 : 0;
-					this.listUserLines.unshift(new UserLine(id, text, "", false));	
+					let id = this.listUserLines.length > 0 ? this.listUserLines.length - 1 : 0;
+					this.listUserLines.unshift(new UserLine(id, text, "", false));
 
 					this.scrollToTop();
 				},
-				addWorldFromInput: function (e) { 
-					if (e.keyCode === 13) {
-						if (this.searchValue.length === 0) {
-							this.isActiveSearch = false;
-							return;
-						}
-						setFocusInput(); 						
+				addWorldFromInput: function (e) {
+					if (e.keyCode !== 13) return;
 
-						this.isActiveSearch = false;
-						let id = this.listUserLines.length > 0 ? this.listUserLines.length - 1 : 0;
-						let lastSpace = this.searchValue.lastIndexOf(' ');
-						let arrStrs = [];
-						if (lastSpace > 0) {
-							arrStrs = [this.searchValue.substring(0, lastSpace), this.searchValue.substring(lastSpace + 1)];
-						} else {
-							arrStrs = [this.searchValue];
-						}  
-						
-						this.listUserLines.unshift(new UserLine(id, arrStrs[0], arrStrs.length > 1 ? arrStrs[1]:"", false));						
-						this.searchValue = "";
+					this.isActiveSearch = false;
 
+					if (this.searchValue.length === 0) return;
+
+					setFocusInput();
+
+					let id = this.listUserLines.length > 0 ? this.listUserLines.length - 1 : 0;
+					let lastSpace = this.searchValue.lastIndexOf(' ');
+					let lastStr = this.searchValue.substring(lastSpace + 1);
+					let arrStrs = [];
+					var hascount = false;
+
+					switch (lastStr.charAt(0)) {
+						case '0':
+						case '1':
+						case '2':
+						case '3':
+						case '4':
+						case '5':
+						case '6':
+						case '7':
+						case '8':
+						case '9':
+							hascount = true;
+							break;
+					} 
+					
+					if (lastSpace > 0 && hascount == true) {
+						arrStrs = [this.searchValue.substring(0, lastSpace), lastStr];
+					} else {
+						arrStrs = [this.searchValue];
+					}
+
+					if (!this.isContainsWorld(arrStrs[0].toLowerCase())) {
+						this.listUserLines.unshift(new UserLine(id, arrStrs[0], arrStrs.length > 1 ? arrStrs[1] : "", false));
 						this.scrollToTop();
 					}
+					else {
+				
+						try {
+							navigator.notification.alert(
+								'Этот товар уже есть в списке :)',  // message
+								alertDismissed,         // callback
+								'Эй ты чего?',            // title
+								'ОК'                  // buttonName
+							);
+						}
+						catch (err) {
+
+						}
+				
+					}
+					
+					this.searchValue = ""; 
+					
+
 				}
 
 
@@ -89,7 +142,11 @@ class ListManager {
 	}
 }
 
-function setFocusInput () {
+function alertDismissed(): void {
+
+}
+
+function setFocusInput() {
 	document.getElementById("searchinput").focus();
 }
 
@@ -112,6 +169,7 @@ var listManager: ListManager;
 var listWorlds: ListWorlds;
 
 function onLoadPage() {
+	data = new AppData();
 	main = new Main();
 	listWorlds = new ListWorlds();
 	listManager = new ListManager();
