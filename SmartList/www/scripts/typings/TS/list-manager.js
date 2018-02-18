@@ -108,7 +108,7 @@ var ListManager = /** @class */ (function () {
                         try {
                             navigator.notification.alert('Этот товар уже есть в списке :)', // message
                             alertDismissed, // callback
-                            'Эй ты чего?', // title
+                            '', // title
                             'ОК' // buttonName
                             );
                         }
@@ -140,9 +140,52 @@ var main;
 var listManager;
 var listWorlds;
 function onLoadPage() {
+    dbTest();
     data = new AppData();
     main = new Main();
     listWorlds = new ListWorlds();
     listManager = new ListManager();
+}
+function dbTest() {
+    initDatabase();
+    addRecord();
+    selectRecords();
+}
+var database = null;
+var nextUser = 101;
+function initDatabase() {
+    database = window.sqlitePlugin.openDatabase({ name: 'sample.db', location: 'default' });
+    database.transaction(function (transaction) {
+        transaction.executeSql('CREATE TABLE SampleTable (name, score)');
+    });
+}
+function echoTest() {
+    window.sqlitePlugin.echoTest(function () {
+        window.navigator.notification.alert('Echo test OK------------');
+    }, function (error) {
+        window.navigator.notification.alert('Echo test ERROR: ----------------' + error.message);
+    });
+}
+function addRecord() {
+    database.transaction(function (transaction) {
+        transaction.executeSql('INSERT INTO SampleTable VALUES (?,?)', ['User ' + nextUser, nextUser]);
+    }, function (error) {
+        window.navigator.notification.alert('INSERT error: ' + error.message);
+    }, function () {
+        window.navigator.notification.alert('INSERT OK');
+        ++nextUser;
+    });
+}
+function selectRecords() {
+    database.transaction(function (transaction) {
+        transaction.executeSql('SELECT * FROM SampleTable', [], function (ignored, result) {
+            window.navigator.notification.alert("tread console");
+            for (var i = 0; i < result.rows.length; i++) {
+                console.log(result.rows.item(i).name);
+            }
+        });
+    }, function (error) {
+        window.navigator.notification.alert('SELECT count error: ' + error.message);
+    });
 }
 //# sourceMappingURL=list-manager.js.map

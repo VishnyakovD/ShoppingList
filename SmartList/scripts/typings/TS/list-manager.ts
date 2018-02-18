@@ -120,9 +120,9 @@ class ListManager {
 						try {
 							navigator.notification.alert(
 								'Этот товар уже есть в списке :)',  // message
-								alertDismissed,         // callback
-								'Эй ты чего?',            // title
-								'ОК'                  // buttonName
+								alertDismissed,                     // callback
+								'',			                        // title
+								'ОК'                                // buttonName
 							);
 						}
 						catch (err) {
@@ -169,10 +169,64 @@ var listManager: ListManager;
 var listWorlds: ListWorlds;
 
 function onLoadPage() {
+	dbTest();
 	data = new AppData();
 	main = new Main();
 	listWorlds = new ListWorlds();
-	listManager = new ListManager();
-
+	listManager = new ListManager();  
 }
 
+
+function dbTest() {
+	initDatabase(); 
+	addRecord();
+	selectRecords();
+}
+
+var database = null;
+
+var nextUser = 101;
+
+function initDatabase() {
+	database = (<any>window).sqlitePlugin.openDatabase({ name: 'sample.db', location: 'default' });
+
+	database.transaction(function (transaction) {
+		transaction.executeSql('CREATE TABLE SampleTable (name, score)');
+	});
+}
+
+function echoTest() {
+	(<any>window).sqlitePlugin.echoTest(function () {
+		(<any>window).navigator.notification.alert('Echo test OK------------');
+	}, function (error) {
+		(<any>window).navigator.notification.alert('Echo test ERROR: ----------------' + error.message);
+	});
+}
+
+function addRecord() {
+	database.transaction(function (transaction) {
+		transaction.executeSql('INSERT INTO SampleTable VALUES (?,?)', ['User ' + nextUser, nextUser]);
+	}, function (error) {
+		(<any>window).navigator.notification.alert('INSERT error: ' + error.message);
+	}, function () {
+		(<any>window).navigator.notification.alert('INSERT OK');
+		++nextUser;
+	});
+}
+
+function selectRecords() {
+	database.transaction(function (transaction) {
+		transaction.executeSql('SELECT * FROM SampleTable', [], function (ignored, result) {
+			(<any>window).navigator.notification.alert("tread console");
+			
+			for (var i = 0; i < result.rows.length; i++) {
+				console.log(result.rows.item(i).name);
+			}
+			
+		
+		
+		});
+	}, function (error) {
+		(<any>window).navigator.notification.alert('SELECT count error: ' + error.message);
+	});
+}
